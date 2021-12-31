@@ -1,0 +1,125 @@
+6+5// scripts>>
+
+// USEFUL ARRAYS
+// array of all servers 
+var servers = ["foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi", "neo-net", "CSEC", "zer0", "max-hardware", "iron-gym", "phantasy", "silver-helix", "omega-net", "avmnite-02h", "crush-fitness", "the-hub", "johnson-ortho", "comptek", "netlink", "rothman-uni", "catalyst", "summit-uni", "aevum-police", "rho-contruction", "millenium-fitness", "alpha-ent", "syscore", "lexo-corp", "zb-institute", "snap-fitness", "global-pharm", "galactic-cyber", "solaris", "zeus-med", "aerocorp", "univ-energy", "deltaone", "omnia", "defcomm", "icarus"]
+
+// array of all .exe programs
+var openPort = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
+
+//============================================== temp home for scripts ========================================================//
+
+// this script iterates thru all Purchased servers, kills running scripts, then deletes every purchased server -- killCloudServers.js
+/** @param {NS} ns **/
+export async function main(ns) {
+  let servers = ns.getPurchasedServers()
+  for (let i = 0; i < servers.length; i++) {
+    ns.killall(servers[i])
+    ns.deleteServer(servers[i])
+  }
+}
+
+#################################################################################################################################
+
+// this script runs every .exe program on every server -- nukeAll.js
+var servers = ["foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi", "neo-net", "CSEC", "zer0", "max-hardware", "iron-gym", "phantasy", "silver-helix", "omega-net", "avmnite-02h", "crush-fitness", "the-hub", "johnson-ortho", "comptek", "netlink", "rothman-uni", "catalyst", "summit-uni", "aevum-police", "rho-contruction", "millenium-fitness", "alpha-ent", "syscore", "lexo-corp", "zb-institute", "snap-fitness", "global-pharm", "galactic-cyber", "solaris", "zeus-med", "aerocorp", "univ-energy", "deltaone", "omnia", "defcomm", "icarus"]
+var openPort = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
+
+for (var i = 0; i < servers.length; i++) {
+	connect(servers[i])
+	for (var j = 0; j < openPort.length; j++) {
+		exec(openPort[j], servers[i], 25)
+	}
+	sleep(5000);
+}
+
+#################################################################################################################################
+
+// this script loops thru & copies a specified script/s to every cloud server --  runs script on all cloud servers 
+/** @param {NS} ns **/
+export async function main(ns) {
+
+	
+	// let servers = ["foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi", "neo-net", "CSEC", "zer0", "max-hardware", "iron-gym", "phantasy", "silver-helix", "omega-net", "avmnite-02h", "crush-fitness", "the-hub", "johnson-ortho", "comptek", "netlink", "rothman-uni", "catalyst", "summit-uni", "aevum-police", "rho-construction", "millenium-fitness", "alpha-ent", "syscore", "lexo-corp", "zb-institute", "snap-fitness", "global-pharm", "galactic-cyber", "solaris", "zeus-med", "aerocorp", "univ-energy", "deltaone", "omnia", "defcomm", "icarus"]
+	// const newScript = "weaken.js"
+
+	// for (let i = 0; i < servers.length; i++) {
+	// 	var server = servers[i]
+	// 	await ns.scp(newScript, server)
+	// }
+
+
+	let cloudservers = ["q1", "q2", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13", "q14", "q15", "q16", "q17", "q18", "q19", "q20", "q21", "q22", "q23", "q24", "a25"]
+	const newScript = "grow.js" // this script is hard coded in here for now 
+
+	for (let i = 0; i < cloudservers.length; i++) {
+		var targetserver = cloudservers[i]
+		await ns.scp(newScript, targetserver)
+		ns.exec(newScript, targetserver, 420)
+	}
+}
+
+#################################################################################################################################
+
+// this script kills a specified script from cloud servers -- kills script on all cloud servers 
+/** @param {NS} ns **/
+export async function main(ns) {
+
+	// method that selects all purchased cloud servers 
+	let allServers = getPurchasedServers();
+
+	// array that includes all cloud servers 
+	let cloudservers = ["q1", "q2", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11", "q12", "q13", "q14", "q15", "q16", "q17", "q18", "q19", "q20", "q21", "q22", "q23", "q24", "a25"]
+
+	// split cloud servers into sectors & have different sectors handle certain functions 
+	let sector1 = ["q1", "q2", "q4", "q5"]
+	let sector2 = ["q6", "q7", "q8", "q9", "q10"]
+	let sector3 = ["q11", "q12", "q13", "q14", "q15"]
+	let sector4 = ["q16", "q17", "q18", "q19", "q20"]
+	let sector5 = ["q21", "q22", "q23", "q24", "a25"]
+
+	// iterate thru selected array & kill the current running script 
+	for (let i = 0; i < cloudservers.length; i++) {
+		ns.kill("grow.js", cloudservers[i])
+	}
+	await ns.sleep(5000)
+}
+
+#################################################################################################################################
+
+// this script automates the process of purchashing cloud servers -- you may specify how much RAM you want these servers to have -- buyCloudServers.script
+// How much RAM each purchased server will have. we will hard code 8 for now 
+var ram = 8;
+
+// Iterator we'll use for our loop
+var i = 0;
+
+// Continuously try to purchase servers until we've reached the maximum
+// amount of servers
+while (i < getPurchasedServerLimit()) {
+    // Check if we have enough money to purchase a server
+    if (getServerMoneyAvailable("home") > getPurchasedServerCost(ram)) {
+        // If we have enough money, then:
+        //  1. Purchase the server
+        //  2. Copy our hacking script onto the newly-purchased server
+        //  3. Run our hacking script on the newly-purchased server with 3 threads
+        //  4. Increment our iterator to indicate that we've bought a new server
+        var hostname = purchaseServer("q" + i, ram);
+        scp("early-hack-template.script", hostname);
+        exec("early-hack-template.script", hostname, 3);
+        ++i;
+    }
+}
+
+#################################################################################################################################
+
+// this script iterates thru every server 
+
+#################################################################################################################################
+
+
+#################################################################################################################################
+
+
+#################################################################################################################################
+

@@ -2,4 +2,7 @@
 // array of all servers 
 var servers = ["foodnstuff", "sigma-cosmetics", "joesguns", "nectar-net", "hong-fang-tea", "harakiri-sushi", "neo-net", "CSEC", "zer0", "max-hardware", "iron-gym", "phantasy", "silver-helix", "omega-net", "avmnite-02h", "crush-fitness", "the-hub", "johnson-ortho", "comptek", "netlink", "rothman-uni", "catalyst", "summit-uni", "aevum-police", "rho-contruction", "millenium-fitness", "alpha-ent", "syscore", "lexo-corp", "zb-institute", "snap-fitness", "global-pharm", "galactic-cyber", "solaris", "zeus-med", "aerocorp", "univ-energy", "deltaone", "omnia", "defcomm", "icarus"]
 
+// array of all .exe programs
+var openPort = ["BruteSSH.exe", "FTPCrack.exe", "relaySMTP.exe", "HTTPWorm.exe", "SQLInject.exe"]
+
 
